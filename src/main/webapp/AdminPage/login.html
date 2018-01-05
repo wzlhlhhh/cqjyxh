@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台登录页</title>
+    <style>
+        #win10-login {
+            background: url('#(b.AdminFilePath)/img/wallpapers/login.jpg') no-repeat fixed;
+            width: 100%;
+            height: 100%;
+            background-size: 100% 100%;
+            position: fixed;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+
+        #win10-login-box {
+            width: 300px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .win10-login-box-square {
+            width: 105px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background-color: darkgray;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .win10-login-box-square::after {
+            content: "";
+            display: block;
+            padding-bottom: 100%;
+        }
+
+        .win10-login-box-square .content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        input {
+            width: 90%;
+            display: block;
+            border: 0;
+            margin: 0 auto;
+            line-height: 36px;
+            font-size: 20px;
+            padding: 0 1em;
+            border-radius: 5px;
+            margin-bottom: 11px;
+        }
+
+        .login-username, .login-password {
+            width: 91%;
+            font-size: 13px;
+            color: #999;
+        }
+
+        .login-password {
+            width: calc(91% - 54px);
+            -webkit-border-radius: 2px 0 0 2px;
+            -moz-border-radius: 2px 0 0 2px;
+            border-radius: 5px 0 0 5px;
+            margin: 0px;
+            float: left;
+        }
+
+        .login-submit {
+            margin: 0px;
+            float: left;
+            -webkit-border-radius: 0 5px 5px 0;
+            -moz-border-radius: 0 5px 5px 0;
+            border-radius: 0 5px 5px 0;
+            background-color: #009688;
+            width: 54px;
+            display: inline-block;
+            height: 36px;
+            line-height: 36px;
+            padding: 0 auto;
+            color: #fff;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            opacity: .9;
+            filter: alpha(opacity=90);
+
+        }
+    </style>
+</head>
+<body >
+<div id="win10-login">
+    <div style="height: 10%;min-height: 120px"></div>
+    <div id="win10-login-box">
+        <div class="win10-login-box-square">
+            <img src="#(b.AdminFilePath)/img/avatar.jpg" class="content"/>
+        </div>
+        <p style="font-size: 24px;color: white;text-align: center">管理员</p>
+         #if( msg!=null )
+         	<div style="color:red; font-size:20px;margin-left:10px; margin-bottom:5px; margin-top:-20px;">#(msg)</div>
+         #end
+        <form id="loginForm" target="" method="post" action="#(b.URLQZ)/welcome">
+            <!--用户名-->
+            <input type="text" id="username" name="username" placeholder="请输入登录名" class="login-username">
+            <!--密码-->
+            <input type="password" id="password" name="password" placeholder="请输入密码" class="login-username">
+            <!--登陆按钮-->
+            <div id="" style="float:left;color: white;font-size: 16px; height: 40px; display: inline;">
+            	<input type="text" id="code_input" style="float:left;width:100px;margin-top: 5px;font-size: 12px;margin-right: 35px;" value="" placeholder="请输入验证码"/>
+            	<div align="center" id="v_container" style="margin-top: 5px;width: 130px;height: 35px;float:left; border-radius: 5px;"></div>
+            </div>
+        	<input type="button" style="width:200px;margin-top: 10px; margin-left: 50px;font-size: 20px;border-radius: 15px; background-color:  #337AB7; color: white;"  value="登      录" id="my_button" class="login-submit"/>
+        </form>
+    </div>
+    <script src="#(b.AdminFilePath)/js/gVerify.js"></script>
+    <script>
+        var verifyCode = new GVerify("v_container");
+        document.getElementById("my_button").onclick = function(){      	
+            var res = verifyCode.validate(document.getElementById("code_input").value);
+            if(res){
+                //alert("验证正确");
+                loginForm.submit();
+            }else{
+                alert("验证码错误");
+            }
+        }
+        
+    </script>
+</div>
+</body>
+</html>

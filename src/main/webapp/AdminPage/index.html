@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <title>重庆交运协会网站后台</title>
+    <link rel='Shortcut Icon' type='image/x-icon' href='#(b.AdminFilePath)/img/windows.ico'>
+    <script type="text/javascript" src="#(b.AdminFilePath)/js/jquery-2.2.4.min.js"></script>
+    <link href="#(b.AdminFilePath)/css/animate.css" rel="stylesheet">
+    <script type="text/javascript" src="#(b.AdminFilePath)/component/layer-v3.0.3/layer/layer.js"></script>
+    <link rel="stylesheet" href="#(b.AdminFilePath)/component/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="#(b.AdminFilePath)/css/default.css" rel="stylesheet">
+    <script type="text/javascript" src="#(b.AdminFilePath)/js/win10.js"></script>
+    <style>
+        * {
+            font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu
+        }
+        /*磁贴自定义样式*/
+        .win10-block-content-text {
+            line-height: 44px;
+            text-align: center;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        Win10.onReady(function () {
+
+            //设置壁纸
+            Win10.setBgUrl({
+                main:'#(b.AdminFilePath)/img/wallpapers/new.jpg',
+                mobile:'#(b.AdminFilePath)/img/wallpapers/mobile.jpg',
+            });
+
+            Win10.setAnimated([
+                'animated flip',
+                'animated bounceIn',
+            ], 0.01);
+
+//          setTimeout(function () {
+//              Win10.newMsg('官方交流一群', '欢迎各位大侠加入讨论：<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=4Er0u8i">[点击加入]205546163</a>')
+//          }, 2500);
+			
+			//公告栏
+//          setTimeout(function () {
+//              Win10.openUrl('//win10ui.yuri2.cn/src/broadcast.html','<i class="fa fa-newspaper-o icon red"></i>公告',[['300px', '380px'],'rt'])
+//          },2000);
+
+        });
+
+    </script>
+</head>
+<body>
+<div id="win10">
+    <div class="desktop">
+        <div id="win10-shortcuts" class="shortcuts-hidden">
+        	<div class="shortcut" onclick="Win10.openUrl('#(b.URLQZ)/systemxh','<img class=\'icon\' src=\'#(b.AdminFilePath)/img/icon/win10.png\'/>系统设置')">
+                <img class="icon" src="#(b.AdminFilePath)/img/icon/win10.png"/>
+                <div class="title">协会网站管理</div>
+            </div>
+            <div class="shortcut" onclick="Win10.openUrl('#(b.URLQZ)/user','<img class=\'icon\' src=\'#(b.AdminFilePath)/img/icon/user.jpg\'/>用户管理')">
+                <img class="icon" src="#(b.AdminFilePath)/img/icon/user.jpg"/>
+                <div class="title">用户管理</div>
+           </div>
+            <div class="shortcut" onclick="Win10.openUrl('#(b.URLQZ)/news','<img class=\'icon\' src=\'#(b.AdminFilePath)/img/icon/doc.png\'/>新闻管理')">
+                <img class="icon" src="#(b.AdminFilePath)/img/icon/doc.png"/>
+                <div class="title">新闻管理</div>
+           </div>
+            
+        </div>
+        <div id="win10-desktop-scene"></div>
+    </div>
+    <div id="win10-menu" class="hidden" style="width: 580px;">
+        <div class="list win10-menu-hidden animated animated-slideOutLeft">
+            <div class="item"><img class="icon" src="#(b.AdminFilePath)/img/icon/win10.png"></img><span>协会网站管理</span></div>
+            <div class="sub-item" onclick="Win10.openUrl('#(b.URLQZ)/xhwzgl?type=协会简介','协会简介')">协会简介</div>
+            <div class="sub-item" onclick="Win10.openUrl('#(b.URLQZ)/xhwzgl?type=协会章程','协会章程')">协会章程</div>
+            <div class="sub-item" onclick="Win10.openUrl('#(b.URLQZ)/xhwzgl?type=协会领导','协会领导')">协会领导</div>
+            <div class="sub-item" onclick="Win10.openUrl('#(b.URLQZ)/xhwzgl?type=组织机构','组织机构')">组织机构</div>
+            <div class="sub-item" onclick="Win10.openUrl('#(b.URLQZ)/xhwzgl?type=会员单位','会员单位')">会员单位</div>
+            <div class="sub-item" onclick="Win10.openUrl('#(b.URLQZ)/xhwzgl?type=入会须知','入会须知')">入会须知</div>
+            <div class="sub-item" onclick="Win10.openUrl('#(b.URLQZ)/xhwzgl?type=专业委员会','专业委员会')">专业委员会</div>
+            <div class="item" ><i class=" blue icon  fa fa-user-circle-o fa-fw" ></i>用户管理</div>
+            <div class="sub-item" onclick="Win10.openUrl('#(b.URLQZ)/user_add','用户添加')">用户添加</div>
+            <div class="sub-item" onclick="Win10.openUrl('#(b.URLQZ)/user_view','用户修改')">用户修改</div>
+            <div class="sub-item" onclick="Win10.openUrl('#(b.URLQZ)/user_pwdch','密码修改')">密码修改</div>
+            <div class="item" ><i class=" blue icon fa fa-newspaper-o fa-fw" ></i>新闻管理</div>
+            <div class="sub-item" onclick="Win10.openUrl('#(b.URLQZ)/news_ll','新闻浏览')">新闻浏览</div>
+            <div class="sub-item" onclick="Win10.openUrl('#(b.URLQZ)/news_add','新闻添加')">新闻添加</div>
+            <div class="sub-item" onclick="Win10.openUrl('#(b.URLQZ)/news_view','新闻修改')">新闻修改</div>
+            <div class="item" onclick="Win10.commandCenterOpen()"><i class="blue icon fa fa-bell fa-fw"></i>打开消息中心</div>
+            <div class="item" onclick=" Win10.exit();"><i class="black icon fa fa-power-off fa-fw"></i>退出系统</div>
+        </div>
+        <div class="blocks" >
+            <div class="menu_group">
+                <div class="title">
+                    	协会网站
+                </div>
+                <div loc="1,1" size="6,2" class="block">
+                    <div class="content blue" >
+                        <img style="width: 260px;" src="#(b.AdminFilePath)/img/LOGO.png" onclick="Win10.openUrl('/#(b.PJname)/index','重庆交运协会')">
+                    </div>
+                </div>
+                <div loc="1,3" size="6,4" class="block">
+                    <div class="content blue cover" style="font-size: 30px;line-height: 176px;text-align: center">
+                        <i class="fa fa-cloud fa-fw"></i> 天气
+                    </div>
+                    <div class="content" style="background-color: rgb(46,147,217)">
+                        <iframe src="//www.seniverse.com/weather/weather.aspx?uid=U43DF172E7&cid=CHBJ000000&l=&p=SMART&a=1&u=C&s=13&m=2&x=1&d=1&fc=&bgc=2E93D9&bc=&ti=0&in=0&li=" frameborder="0" scrolling="no" width="280" height="300" allowTransparency="true"></iframe>
+                    </div>
+                </div>
+                
+            </div>
+
+            
+        </div>
+        <div id="win10-menu-switcher"></div>
+    </div>
+    <div id="win10_command_center" class="hidden_right">
+        <div class="title">
+            <h4 style="float: left">消息中心 </h4>
+            <span id="win10_btn_command_center_clean_all">全部清除</span>
+        </div>
+        <div class="msgs"></div>
+    </div>
+    <div id="win10_task_bar">
+        <div id="win10_btn_group_left" class="btn_group">
+            <div id="win10_btn_win" class="btn"><span class="fa fa-windows"></span></div>
+            <!--<div class="btn" id="win10-btn-browser"><span class="fa fa-internet-explorer"></span></div>-->
+        </div>
+        <div id="win10_btn_group_middle" class="btn_group"></div>
+        <div id="win10_btn_group_right" class="btn_group">
+            <div class="btn" id="win10_btn_time">
+                <!--0:00<br/>-->
+                <!--1993/8/13-->
+            </div>
+            <div class="btn" id="win10_btn_command"><span id="win10-msg-nof" class="fa fa-comment-o"></span></div>
+            <div class="btn" id="win10_btn_show_desktop"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

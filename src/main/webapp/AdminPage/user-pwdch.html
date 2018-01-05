@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <!--触屏适配-->
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	    <title>修改密码</title>
+	
+	    <!-- Bootstrap -->
+	    <link href="#(b.AdminFilePath)/css/bootstrap.min.css" rel="stylesheet">
+	    <link rel="stylesheet" type="text/css" href="#(b.AdminFilePath)/css/user-a.css"/>
+	</head>
+	<body onload="showMsg();">
+		<div class="container">
+			<div class="row">
+				<!--导航栏-->
+				<div id="lefttt-a" align="center" class="col-xs-1 col-sm-1 col-md-1">
+					<div id="nav-pic-a" >
+						<img src="#(b.AdminFilePath)/img/icon/user.jpg"/>
+					</div>
+					<div id="nav-title-a">
+						用户管理
+						<div class="nav-sub-title-a"> 
+							<a href="#(b.URLQZ)/user_add">用户添加</a>
+						</div>
+						<div class="nav-sub-title-a">
+							<a href="#(b.URLQZ)/user_view">用户修改</a>
+						</div>
+						<div class="nav-sub-title-a">
+							密码修改
+						</div>
+					</div>
+				</div>
+				<!--内容展示-->
+	  			<div id="righttt" class="col-xs-11 col-sm-11 col-md-11">
+	  				<div id="rightt-title">
+	  					密码修改
+	  				</div>
+	  				<div id="rightt-content-a">
+						<div id="tb-cont" class="bs-docs-example">
+							<form action="pwd_change" method="get">
+								<table id="add-tb" class="table">
+									<tr>
+										<td  align="center">现操作用户</td>
+										<td>#(user)<input type="hidden" name="username" id="username" value="#(user)" /></td>
+									</tr>
+									<tr>
+										<td  align="center">输入旧密码</td>
+										<td><input type="password" name="pwd_old" id="pwd_old" value="" /></td>
+									</tr>
+									<tr>
+										<td  align="center">输入新密码</td>
+										<td><input type="password" id="pwd_new" name="pwd_new" value="" /></td>
+									</tr>
+									<tr>
+										<td  align="center">确认新密码</td>
+										<td><input type="password" id="pwd_new_r" name="pwd_new_r" value="" /></td>
+									</tr>
+									<tr>
+										<td align="right"><input class="btn btn-primary" type="submit" id="submit" onclick="return chkPwd();" name="submit" value="修改"/></td>
+										<td align="left">
+											<input class="btn btn-primary" type="reset" id="reset" name="reset" value="重置"/>
+										</td>
+									</tr>
+								</table>
+							</form>
+						</div>
+					</div>
+	  			</div>
+			</div>
+		</div>
+		<script>
+			function chkPwd()
+			{
+				var p1 = document.getElementById("pwd_new").value;
+				var p2 = document.getElementById("pwd_new_r").value;
+				
+				//检测是否小于6位
+				if(p1.length < 6)
+				{
+					alert("密码小于6位！");
+					return false;
+				}
+				
+				//检测是否相同
+				if(p1 == p2)
+				{
+					return true;
+				}
+				else
+				{
+					alert("两次输入密码不一致！");
+					return false;
+				}
+				
+				return true;
+			}
+			
+			function showMsg()
+			{
+				if("#(msg)" != "")
+				{
+					alert("#(msg)");
+				}
+			}
+		</script>
+	</body>
+</html>

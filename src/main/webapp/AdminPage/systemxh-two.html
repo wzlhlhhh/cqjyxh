@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <!--触屏适配-->
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	    <title>新闻添加</title>
+
+	    <!-- 实例化编辑器 -->
+	    <!-- Bootstrap -->
+
+	   
+	   	<script src="#(b.AdminFilePath)/js/wangEditor.js" type="text/javascript" charset="utf-8"></script>
+	    <link href="#(b.AdminFilePath)/css/bootstrap.min.css" rel="stylesheet">
+	    <link rel="stylesheet" type="text/css" href="#(b.AdminFilePath)/css/user-a.css"/>
+
+	</head>
+	<body onload="showMsg();">
+		<div class="container">
+			<div class="row">
+				<!--导航栏-->
+				<div id="lefttt-a" align="center" class="col-xs-1 col-sm-1 col-md-1">
+					<div id="nav-pic-a" >
+						<img src="#(b.AdminFilePath)/img/icon/win10.png"/>
+					</div>
+					<div id="nav-title-a">
+						协会网站管理
+						<div class="nav-sub-title-a"> 
+							<a href="#(b.URLQZ)/xhwzgl?type=协会简介">协会简介</a>
+						</div>
+						<div class="nav-sub-title-a">
+							<a href="#(b.URLQZ)/xhwzgl?type=协会章程">协会章程</a>
+						</div>
+						<div class="nav-sub-title-a"> 
+							<a href="#(b.URLQZ)/xhwzgl?type=协会领导">协会领导</a>
+						</div>
+						<div class="nav-sub-title-a">
+							<a href="#(b.URLQZ)/xhwzgl?type=组织机构">组织机构</a>
+						</div>
+						<div class="nav-sub-title-a">
+							<a href="#(b.URLQZ)/xhwzgl?type=专业委员会">专业委员会</a>
+						</div>
+						<div class="nav-sub-title-a"> 
+							<a href="#(b.URLQZ)/xhwzgl?type=会员单位">会员单位</a>
+						</div>
+						<div class="nav-sub-title-a">
+							<a href="#(b.URLQZ)/xhwzgl?type=入会须知">入会须知</a>
+						</div>
+					</div>
+				</div>
+				<!--内容展示-->
+	  			<div id="righttt" class="col-xs-11 col-sm-11 col-md-11">
+	  				<div id="rightt-title">
+	  					#(type)
+	  				</div>
+	  				<div id="rightt-content-a">
+						<div class="bs-docs-example">
+							<div>
+								<form action="#(b.URLQZ)/xhwzgl_change" method="post">
+								    <div id="textarea1" style="width:920px;">
+									    <p>#(content)</p>
+									</div>
+									<input type="hidden" id="id" name="id" value="#(id)">
+									<input type="hidden" id="type" name="type" value="#(type)">
+									<input type="hidden" id="content" name="content">
+									<input type="submit" name="hq" id="hq" style="margin-top:10px;" onclick="return showXX()" value="更新"  />
+								</form>
+							</div>
+						</div>
+					</div>
+	  			</div>
+			</div>
+		</div>
+    	
+		<script type="text/javascript">
+			var E = window.wangEditor;
+			var editor2 = new E('#textarea1');
+			
+			editor2.customConfig.uploadFileName = 'uploadPic';
+			editor2.customConfig.uploadImgServer = '#(b.URLQZ)/upload';
+			editor2.customConfig.showLinkImg = false;
+			
+			editor2.customConfig.menus = [
+			    'head',  // 标题
+			    'bold',  // 粗体
+			    'italic',  // 斜体
+			    'underline',  // 下划线
+			    'strikeThrough',  // 删除线
+			    'foreColor',  // 文字颜色
+			    'backColor',  // 背景颜色
+			    'link',  // 插入链接
+			    'justify',  // 对齐方式
+			    'quote',  // 引用
+			    'image',  // 插入图片
+			    'undo',  // 撤销
+			    'redo'  // 重复
+			]
+			editor2.customConfig.uploadImgHooks = {  
+	          
+		        success: function (xhr, editor, result) {  
+		            // 图片上传并返回结果，图片插入成功之后触发  
+		            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果  
+		            console.log('success');  
+		        },  
+		        fail: function (xhr, editor, result) {  
+		            // 图片上传并返回结果，但图片插入错误时触发  
+		            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+		            console.log(xhr);
+		            console.log(result);
+		            console.log('failll');
+		        },  
+		        error: function (xhr, editor) {  
+		            // 图片上传出错时触发  
+		            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象  
+		            console.log('error');  
+		        }
+		    }  
+		   
+			
+			editor2.create();
+			
+			function showXX()
+			{
+				var content = document.getElementById("content");
+				content.value=editor2.txt.html();
+				
+				if(document.getElementById('content').value=="")
+				{
+					alert("请填写内容！");
+					return false;
+				}
+								
+				return true;
+			}
+			
+			function showMsg()
+			{
+				if("#(msg)" != "")
+				{
+					alert("#(msg)");
+				}
+			}
+		</script>
+	</body>
+</html>

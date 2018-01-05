@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <!--触屏适配-->
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	    <title>用户修改</title>
+	
+	    <!-- Bootstrap -->
+	    <script src="#(b.AdminFilePath)/js/jquery-2.2.4.min.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="#(b.AdminFilePath)/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	    <link href="#(b.AdminFilePath)/css/bootstrap.min.css" rel="stylesheet">
+	    <link rel="stylesheet" type="text/css" href="#(b.AdminFilePath)/css/user-a.css"/>
+	</head>
+	<body onload="showMsg()">
+		<div class="container">
+			<div class="row">
+				<!--导航栏-->
+				<div id="lefttt-a" align="center" class="col-xs-1 col-sm-1 col-md-1">
+					<div id="nav-pic-a" >
+						<img src="#(b.AdminFilePath)/img/icon/user.jpg"/>
+					</div>
+					<div id="nav-title-a">
+						用户管理
+						<div class="nav-sub-title-a"> 
+							<a href="#(b.URLQZ)/user_add">用户添加</a>
+						</div>
+						<div class="nav-sub-title-a">
+							用户修改
+						</div>
+						<div class="nav-sub-title-a">
+							<a href="#(b.URLQZ)/user_pwdch">密码修改</a>
+						</div>
+					</div>
+				</div>
+				<!--内容展示-->
+	  			<div id="righttt" class="col-xs-11 col-sm-11 col-md-11">
+	  				<div id="rightt-title">
+	  					用户修改
+	  				</div>
+	  				<div id="rightt-content-a">
+						<div class="bs-docs-example">
+							<form class="form-inline" action="find_user" method="post" >
+								<input style="width:200px;" id="find_usera" name="find_usera" type="text" class="form-control" placeholder="搜索用户"/>
+								<input type="submit"   class="btn btn-primary" name="" id="" value="搜索" />
+							</form>
+							
+							<form action="" method="post">
+								<table id="del-tb" class="table table-striped table-bordered" >
+									<thead>
+										<tr align="center">
+											<td width="240">用户名</td>
+											<td width="220">简介</td>
+											<td width="270">负责人</td>
+											<td width="270">操作</td>
+										</tr>
+									</thead>
+									<tbody>
+									#for( x:users )
+										<tr>
+										
+											<td>#(x.user_name)</td>
+											<td>
+												#if( x.role == 1)
+													管理员
+												#else
+													会员
+												#end
+											</td>
+											<td>#(x.real_name)</td>
+											<td>
+												<button type="button" class="btn btn-primary" onclick="WatchU(#(x.id));">查看</button>
+												<button type="button" class="btn btn-primary" onclick="ChangeU(#(x.id));">修改</button>
+												<button type="button" class="btn btn-danger" onclick="DeleteU(#(x.id), '#(x.user_name)');">删除</button>
+											</td>
+										</tr>
+										
+									#end
+										
+										<tr align="center" style="font-size: 18px;">
+											<td colspan="4">
+												第 #(onpage)/#(page_all)页
+												
+												
+												#if( findstatus == 1 )
+													
+													#for( x=1; x<= page_all; x++ )
+														#if( x==onpage )
+															<a style="text-decoration: underline;" href="#(b.URLQZ)/find_user?page=#(x)&find_usera=#(finduser)">#(x)</a>
+														#else
+															<a href="#(b.URLQZ)/find_user?page=#(x)&find_usera=#(finduser)">#(x)</a>
+														#end
+													#end
+													
+													
+												#else
+													#if( onpage != 1 )
+														<a href="#(b.URLQZ)/user_view?page=#(onpage-1)">上一页</a>
+													#end
+													#for( x=1; x<= page_all; x++ )
+														#if( x==onpage )
+															<a style="text-decoration: underline;" href="#(b.URLQZ)/user_view?page=#(x)">#(x)</a>
+														#else
+															<a href="#(b.URLQZ)/user_view?page=#(x)">#(x)</a>
+														#end
+													#end
+													
+													#if( onpage != page_all )
+														<a href="#(b.URLQZ)/user_view?page=#(onpage+1)">下一页</a>
+													#end
+												#end
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
+						</div>
+					</div>
+	  			</div>
+			</div>
+			
+		</div>
+		#for( x:users )
+		<div class="WatchU" id="WatchU_#(x.id)">
+			<div class="detailU">
+				<div class="topU">
+					用户信息查看
+				</div>
+				<div class="contentU">
+					<table class="table table-bordered table-striped">
+						<tr>
+							<td width="200"  align="center">用户名</td>
+							<td>#(x.user_name)</td>
+						</tr>
+						<tr>
+							<td  align="center">现负责人</td>
+							<td>#(x.real_name)</td>
+						</tr>
+						<tr>
+							<td  align="center">分类</td>
+							<td>
+							#if( x.role == 1 )
+								管理员
+							#else
+								会员
+							#end
+							</td>
+						</tr>
+						<tr>
+							<td  align="center">id</td>
+							<td>#(x.id)</td>
+						</tr>
+						
+					</table>
+				</div>
+				<div class="taskU">
+					<button type="button" class="btn btn-primary" onclick="WatchUClose(#(x.id));">关闭</button>
+				</div>
+			</div>										
+		</div>
+		#end
+		<div class="DeleteU" id="DeleteU">
+			<div class="detailU">
+				<div class="topU">
+					用户删除确认框
+				</div>
+				<div class="contentU">
+					<div id="delinfo"></div>
+				</div>
+				<div class="taskUU">
+					<button type="button" class="btn btn-danger" onclick="DeleteUCloseS();">确认</button>
+					<button type="button" class="btn btn-primary" onclick="DeleteUClose();">取消</button>
+				</div>
+			</div>										
+		</div>
+		#for( x:users )
+		<div class="ChangeU" id="ChangeU_#(x.id)">
+			<div class="detailU">
+				<div class="topU">
+					用户信息修改
+				</div>
+				<div class="contentU">
+					<table class="table table-bordered table-striped">
+						<tr>
+							<td width="200"  align="center">用户名</td>
+							<td>#(x.user_name)</td>
+						</tr>
+						<tr>
+							<td  align="center">现负责人</td>
+							<td><input type="text" name="real_name_now_#(x.id)" id="real_name_now_#(x.id)" value="#(x.real_name)" placeholder="请指定负责人"/></td>
+						</tr>
+						<tr>
+							<td  align="center">分类</td>
+							<td>
+							#if( x.role == 1 )
+								<input type="text" name="role_now_#(x.id)" id="role_now_#(x.id)" value="管理员" placeholder="1-管理员，2-会员"/>
+							#else
+								<input type="text" name="role_now_#(x.id)" id="role_now_#(x.id)" value="会员" placeholder="1-管理员，2-会员"/>
+							#end
+							</td>
+						</tr>
+						<tr>
+							<td  align="center">id</td>
+							<td>#(x.id)</td>
+						</tr>
+						
+					</table>
+				</div>
+				<div class="taskUU">
+					<button type="button" class="btn btn-danger" onclick="ChangeUCloseS(#(x.id));">更新</button>
+					<button type="button" class="btn btn-primary" onclick="ChangeUClose(#(x.id));">取消</button>
+				</div>
+			</div>										
+		</div>
+		#end
+		<script>
+			var del_id;
+			function showMsg()
+			{
+				if("#(msg)" != "")
+				{
+					alert("#(msg)");
+				}
+			}
+			
+			function WatchU(id)
+			{
+				$("#WatchU_"+id).show();
+			}
+			
+			function WatchUClose(id)
+			{
+				$("#WatchU_"+id).hide();
+			}
+			
+			function ChangeU(id)
+			{
+				$("#ChangeU_"+id).show();
+			}
+			
+			function ChangeUClose(id)
+			{
+				$("#ChangeU_"+id).hide();
+			}
+			
+			function ChangeUCloseS(id)
+			{
+				var role = $("#role_now_"+id).val();
+
+				if(role == "管理员")
+					role = 1;
+				else
+					role = 2;
+				
+				location.href ="#(b.URLQZ)/update_user?id="+id+"&role="+role+"&real_name="+$("#real_name_now_"+id).val();
+
+				
+			}
+			
+			function DeleteU(id, user)
+			{
+				$("#DeleteU").show();
+				$("#delinfo").html("<div style='font-size:24px; padding-top:30px; padding-left:30px;'>是否删除用户</div>"+"<div style='color:red;font-size:20px; padding-left:180px;'>"+user+"</div>");
+				del_id = id;
+			}
+			
+			function DeleteUClose()
+			{
+				$("#DeleteU").hide();
+			}
+			function DeleteUCloseS()
+			{
+				$("#DeleteU").hide();
+				location.href ="#(b.URLQZ)/del_user?id="+del_id;
+			}
+		</script>
+	</body>
+</html>

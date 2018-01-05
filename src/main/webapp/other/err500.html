@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>500错误页面</title>
+		<link rel="stylesheet" media="screen" href="./style.css">
+		<style>
+			html
+			{
+				background: url(./background-3.png) no-repeat center center fixed;
+			}
+		</style>
+		<script language="JavaScript">
+			function dosearch() {
+			var sf=document.searchform;
+			var submitto = sf.sengine.value + escape(sf.searchterms.value);
+			window.location.href = submitto;
+			return false;
+			}
+		</script>
+	</head>
+	<body>
+		
+		
+		<p class="error">500</p>
+		
+		<div class="content">
+			<h2>出了一点小问题。。。请联系管理员</h2>
+			
+			<p class="text">
+				您看到这个页面呢，说明在刚刚的操作中服务器出了点问题，所以除了再试一次刚才的操作外，您还可以联系管理员！
+			</p>
+				
+			<p class="links">
+				<!-- <a id="button" href="/#(b.PJname)/index">&larr; 返回首页</a>  -->
+				<!--These are links. You can change it to a page you want to by replacing the '#' with your url.-->
+			</p>
+		</div>
+		
+	</body>
+</html>

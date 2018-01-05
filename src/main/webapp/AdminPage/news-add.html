@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <!--触屏适配-->
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	    <title>新闻添加</title>
+
+	    <!-- 实例化编辑器 -->
+	    <!-- Bootstrap -->
+
+	   
+	   	<script src="#(b.AdminFilePath)/js/wangEditor.js" type="text/javascript" charset="utf-8"></script>
+	    <link href="#(b.AdminFilePath)/css/bootstrap.min.css" rel="stylesheet">
+	    <link rel="stylesheet" type="text/css" href="#(b.AdminFilePath)/css/user-a.css"/>
+
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<!--导航栏-->
+				<div id="lefttt-a" align="center" class="col-xs-1 col-sm-1 col-md-1">
+					<div id="nav-pic-a" >
+						<img src="#(b.AdminFilePath)/img/icon/doc.png"/>
+					</div>
+					<div id="nav-title-a">
+						新闻管理
+						<div class="nav-sub-title-a">
+							<a href="#(b.URLQZ)/news_ll">新闻概览</a>
+						</div>
+						<div class="nav-sub-title-a"> 
+							新闻添加
+						</div>
+						<div class="nav-sub-title-a">
+							<a href="#(b.URLQZ)/news_view">新闻修改</a>
+						</div>
+					</div>
+				</div>
+				<!--内容展示-->
+	  			<div id="righttt" class="col-xs-11 col-sm-11 col-md-11">
+	  				<div id="rightt-title">
+	  					新闻添加
+	  				</div>
+	  				<div id="rightt-content-a">
+						<div class="bs-docs-example">
+								<div>
+									<form action="#(b.URLQZ)/add_news" method="post">
+									    <h3><input type="text" name="title" id="title" value="" placeholder="新闻标题" /></h3>
+									    <h3>
+									    	<select name="type" id="type"  onchange="showSubtype();"  style=" font-size:20px;height:30px; margin-top: -5px;">
+									    		<option value="null" >类别</option>
+									    		
+							    				<option value="要闻视点">要闻视点</option>
+							    				<option value="最新动态">最新动态</option>
+							    				<option value="法律法规">法律法规</option>
+							    				<option value="协会会员">协会会员</option>
+							    				<option value="领导讲话">领导讲话</option>
+							    				<option value="协会动态">协会动态</option>
+							    				<option value="行业动态">行业动态</option>
+							    				<option value="理论研究">理论研究</option>
+							    				<option value="媒体宣传">媒体宣传</option>
+							    				<option value="区县交委">区县交委</option>
+
+									    	</select>
+									    	<br/>
+									    	<select name="subtype" id="subtype" style="display:none;font-size:16px;height:30px; margin-left:15px;margin-top: 5px;">
+									    		<option value="wu">wu</option>
+									    	</select>
+									    </h3>
+									    <h3><input type="text" style=" font-size:22px;height:30px; margin-top: -5px;" name="author" id="author" value="" placeholder="作者" /></h3>
+									    <div id="textarea1" style="width:920px;">
+										    <p>请输入内容...</p>
+										</div>
+										<input type="hidden" id="content" name="content">
+										<input type="submit" style="margin-top:10px;" name="hq" id="hq" onclick="return showXX()" value="生成新闻"  />
+									</form>
+								</div>
+							
+						</div>
+					</div>
+	  			</div>
+			</div>
+		</div>
+    	
+		<script type="text/javascript">
+			var E = window.wangEditor;
+			var editor2 = new E('#textarea1');
+			
+			editor2.customConfig.uploadFileName = 'uploadPic';
+			editor2.customConfig.uploadImgServer = '#(b.URLQZ)/upload';
+			editor2.customConfig.showLinkImg = false;
+			
+			editor2.customConfig.menus = [
+			    'head',  // 标题
+			    'bold',  // 粗体
+			    'italic',  // 斜体
+			    'underline',  // 下划线
+			    'strikeThrough',  // 删除线
+			    'foreColor',  // 文字颜色
+			    'backColor',  // 背景颜色
+			    'link',  // 插入链接
+			    'justify',  // 对齐方式
+			    'quote',  // 引用
+			    'image',  // 插入图片
+			    'undo',  // 撤销
+			    'redo'  // 重复
+			]
+			console.log(editor2.height);
+			editor2.customConfig.uploadImgHooks = {  
+	          
+		        success: function (xhr, editor, result) {  
+		            // 图片上传并返回结果，图片插入成功之后触发  
+		            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果  
+		            console.log('success');  
+		        },  
+		        fail: function (xhr, editor, result) {  
+		            // 图片上传并返回结果，但图片插入错误时触发  
+		            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+		            console.log(xhr);
+		            console.log(result);
+		            console.log('failll');
+		        },  
+		        error: function (xhr, editor) {  
+		            // 图片上传出错时触发  
+		            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象  
+		            console.log('error');  
+		        }
+		    }  
+		   
+			
+			editor2.create();
+			
+			function showXX()
+			{
+				var content = document.getElementById("content");
+				content.value=editor2.txt.html();
+				
+				if(document.getElementById('type').value=="null")
+				{
+					alert("请选择类别！");
+					return false;
+				}
+				
+				if(document.getElementById('content').value=="")
+				{
+					alert("请填写内容！");
+					return false;
+				}
+				
+				if(document.getElementById('title').value=="")
+				{
+					alert("请填写新闻标题！");
+					return false;
+				}
+				
+				if(document.getElementById('author').value=="")
+				{
+					alert("请填写作者！");
+					return false;
+				}
+				
+				return true;
+			}
+			
+			var obj=document.getElementById('subtype');
+			
+			function showSubtype()
+			{
+				var type = document.getElementById('type').value;
+				console.log(type);
+				switch(type)
+				{
+					case "协会会员":
+						 obj.options.length=0; 
+						//添加一个选项 
+//						obj.add(new Option("会员风采","会员风采")); //这个只能在IE中有效 
+						obj.options.add(new Option("会员风采","会员风采")); //这个兼容IE与firefox 
+						obj.style.display="block";
+						break;
+					case "区县交委":
+						obj.options.length=0; 
+						obj.options.add(new Option("区县交委风采","区县交委风采")); //这个兼容IE与firefox 
+						obj.options.add(new Option("区县交委名称","区县交委名称")); //这个兼容IE与firefox 
+						obj.style.display="block";
+						break;
+					case "法律法规":
+						obj.options.length=0; 
+						obj.options.add(new Option("国家法律","国家法律")); //这个兼容IE与firefox 
+						obj.options.add(new Option("国家法规","国家法规")); //这个兼容IE与firefox 
+						obj.options.add(new Option("地方法规","地方法规")); //这个兼容IE与firefox 
+						obj.style.display="block";
+						break;
+					case "领导讲话":
+						obj.options.length=0; 
+						obj.options.add(new Option("国家领导讲话","国家领导讲话")); //这个兼容IE与firefox 
+						obj.options.add(new Option("部领导讲话","部领导讲话")); //这个兼容IE与firefox 
+						obj.options.add(new Option("地方领导讲话","地方领导讲话")); //这个兼容IE与firefox 
+						obj.options.add(new Option("地方部门领导讲话","地方部门领导讲话")); //这个兼容IE与firefox 
+						obj.style.display="block";
+						break;
+					case "协会动态":
+						obj.options.length=0; 
+						obj.options.add(new Option("协会工作","协会工作")); //这个兼容IE与firefox 
+						obj.options.add(new Option("协会活动","协会活动")); //这个兼容IE与firefox 
+						obj.style.display="block";
+						break;
+					case "行业动态":
+						obj.options.length=0; 
+						obj.options.add(new Option("科技前沿","科技前沿")); //这个兼容IE与firefox 
+						obj.options.add(new Option("区县交委动态","区县交委动态")); //这个兼容IE与firefox 
+						obj.options.add(new Option("会员动态","会员动态")); //这个兼容IE与firefox 
+						obj.options.add(new Option("国内外交通动态","国内外交通动态")); //这个兼容IE与firefox 
+						obj.style.display="block";
+						break;
+					case "理论研究":
+						obj.options.length=0; 
+						obj.options.add(new Option("重庆交通运输行业理论硬座研究文章","重庆交通运输行业理论硬座研究文章")); //这个兼容IE与firefox  
+						obj.style.display="block";
+						break;
+					case "媒体宣传":
+						obj.options.length=0; 
+						obj.options.add(new Option("国内外主流媒体","国内外主流媒体")); //这个兼容IE与firefox  
+						obj.options.add(new Option("《重庆综合运输》","《重庆综合运输》")); 
+						obj.style.display="block";
+						break;
+					default:
+						obj.style.display="none";
+				}
+			}
+		</script>
+	</body>
+</html>

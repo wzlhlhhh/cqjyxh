@@ -1,0 +1,78 @@
+#container-bg
+{
+	height: auto;
+	min-height: 800px;
+	width: 100%;
+	position: absolute;
+	top: 232px;
+	z-index: -1;
+	
+}
+
+#container
+{
+	width: 1000px;
+	background-color: #f1f1f1;
+	margin: 0px auto;
+	margin-top: 10px;
+	height: auto;
+	min-height: 800px;
+}
+
+#container-title
+{
+	
+	height: 20px;
+	width: 1000px;
+	text-align: center;
+	font-size: 28px;
+	font-family: "黑体";
+	color: black;
+	font-weight: bold;
+	margin-top:20px;
+}
+
+#container-sub-title
+{
+	height: 20px;
+	width: 1000px;
+	text-align: center;
+	font-size: 22px;
+	font-family: "宋体";
+	color: gray;
+	font-weight: bold;
+	margin: 30px;
+}
+
+#container-word
+{
+	height: auto;
+	min-height: 600px;
+	padding: 50px;
+	padding-top: 0px;
+	width: 900px;
+	text-align: left;
+	font-size: 22px;
+	font-family: "黑体";
+	line-height:1.3em;
+	color: black;
+	font-weight: 500;
+}
+
+#dw
+{
+	font-size: 16px;
+	font-family: "楷体";
+	color: black;
+}
+
+#dw a:visited
+{
+	color:gray;
+}
+
+#dw a:hover, a:link
+{
+	color:black;
+}
+
