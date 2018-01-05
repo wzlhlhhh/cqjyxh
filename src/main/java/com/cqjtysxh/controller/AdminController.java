@@ -368,11 +368,13 @@ public class AdminController extends Controller{
     		e.printStackTrace();
     	}
     	
-    	String data = "{errno:0 ,data:['122.14.214.242:8080/"+CONST.PJname+"/upload/"+upf.getFileName()+"']}";
+//    	String data = "{errno:0 ,data:['122.14.214.242:/"+CONST.PJname+"/upload/"+upf.getFileName()+"']}";
+    	String data = "{errno:0 ,data:['122.14.214.242/upload/"+upf.getFileName()+"']}";
     	setAttr("data", data);
-    	System.out.println("{errno: 0, data:['"+upf.getUploadPath()+"/"+upf.getFileName()+"']}");
+    	System.out.print("{\"errno\":0, \"data\":[\"http://cqslkj.com.cn/upload/"+upf.getFileName()+"\"]}");
+//    	System.out.println("{errno: 0, data:['"+upf.getUploadPath()+"/"+upf.getFileName()+"']}");
 //    	renderText("{errno:0, data:['http://localhost:8080/"+CONST.PJname+"/upload/"+upf.getFileName()+"']}");
-    	renderJson("{\"errno\":0, \"data\":[\"http://122.14.214.242:8080/"+CONST.PJname+"/upload/"+upf.getFileName()+"\"]}");
+    	renderJson("{\"errno\":0, \"data\":[\"http://cqslkj.com.cn/upload/"+upf.getFileName()+"\"]}");
 //    	renderJson("{errno:0, data:['http://localhost:8080/"+CONST.PJname+"/upload/"+upf.getFileName()+"']}");
     }
     
