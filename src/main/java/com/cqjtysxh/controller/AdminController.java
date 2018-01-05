@@ -33,10 +33,13 @@ public class AdminController extends Controller{
 		Users user = new Users();
 		System.out.println(username+":"+password);
 		boolean b = user.VerifyUser(username, pwd);
-		System.out.println(b);
+		int role = user.getUserPermission(username, pwd);
+		System.out.println("="+b+"=");
 		if(b)
 		{
 			setSessionAttr("user", username);
+			setSessionAttr("role", role);
+			setAttr("role", role);
 			render( "index.html");
 		}
 		else
@@ -47,17 +50,45 @@ public class AdminController extends Controller{
 	}
 	//用户管理
 	public void user()
-	{
-		render("user.html");
+	{	
+		int role = getSessionAttr("role");
+		System.out.println(role);
+		if(role != 1)
+		{
+			render("index.html");
+		}
+		else
+		{
+			render("user.html");
+		}
+		
 	}
 	
 	public void user_add()
 	{
-		render("user-add.html");
+		int role = getSessionAttr("role");
+		if(role != 1)
+		{
+			render("index.html");
+		}
+		else
+		{
+			render("user-add.html");
+		}
+		
 	}
 	
 	public void find_user()
 	{
+		int role = getSessionAttr("role");
+		if(role != 1)
+		{
+			render("index.html");
+		}
+		else
+		{
+			
+		
 		//页码
 		String queryString = getRequest().getQueryString();
 		int s;
@@ -95,11 +126,19 @@ public class AdminController extends Controller{
 		System.out.println(page+":"+page_all+":"+username);
 		
 		render("user-view.html");
+		}
 	}
 	
 	
 	public void add_user()
 	{
+		int role = getSessionAttr("role");
+		if(role != 1)
+		{
+			render("index.html");
+		}
+		else
+		{
 		String username = getPara("username");
 		String password = getPara("password");
 		String real_name = getPara("real_name");
@@ -128,11 +167,19 @@ public class AdminController extends Controller{
     		setAttr("msg", "添加新用户成功！");
     		user_view();
         }
+		}
 		
 	}
 
 	public void user_view()
 	{
+		int role = getSessionAttr("role");
+		if(role != 1)
+		{
+			render("index.html");
+		}
+		else
+		{
 		//页码
 		String queryString = getRequest().getQueryString();
 		int s;
@@ -166,20 +213,36 @@ public class AdminController extends Controller{
 		setAttr("page_all", page_all);
 		
 		render("user-view.html");
+		}
 	}
 	
 	public void del_user()
 	{
+		int role = getSessionAttr("role");
+		if(role != 1)
+		{
+			render("index.html");
+		}
+		else
+		{
 		int id = getParaToInt("id");
 		Users user = new Users();
 		user.deleteById(id);
 		
 		setAttr("msg", "删除成功！");
 		user_view();
+		}
 	}
 	
 	public void update_user()
 	{
+		int roler = getSessionAttr("role");
+		if(roler != 1)
+		{
+			render("index.html");
+		}
+		else
+		{
 		int id = getParaToInt("id");
 		String role = getPara("role");
 		String real_name = getPara("real_name");
@@ -191,16 +254,32 @@ public class AdminController extends Controller{
 		
 		setAttr("msg", "更新成功！");
 		user_view();
+		}
 	}
 	
 	public void user_pwdch()
 	{
+		int role = getSessionAttr("role");
+		if(role != 1)
+		{
+			render("index.html");
+		}
+		else
+		{
 		setAttr("user", getSessionAttr("user"));
 		render("user-pwdch.html");
+		}
 	}
 	
 	public void pwd_change()
 	{
+		int role = getSessionAttr("role");
+		if(role != 1)
+		{
+			render("index.html");
+		}
+		else
+		{
 		String username = getPara("username");
 		String pwd_old = getPara("pwd_old");
 		String pwd_new = getPara("pwd_new");
@@ -226,6 +305,7 @@ public class AdminController extends Controller{
 		{
 			setAttr("msg", "旧密码输入错误！");
 			user_pwdch();
+		}
 		}
 	}
 	//新闻管理
